@@ -8,7 +8,17 @@
 </head>
 <body>
 
-<%= yield %>
+<div class="container">
+  <div class="container-fluid">
+    <h1>Patologi</h1>
+    <ul class="nav nav-tabs">
+      <li id="nav-notif" role="presentation"><a href="/notifications/all">HTTP Notification</a></li>
+      <li id="nav-sms" role="presentation"><a href="/sms">SMS</a></li>
+    </ul>
+    <%= yield %>
+  </div>
+</div>
 
+<%= yield :javascript %>
 </body>
 </html>

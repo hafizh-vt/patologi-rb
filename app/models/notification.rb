@@ -1,5 +1,5 @@
 class Notification < ActiveRecord::Base
-  after_commit :push_notification!, on: :create
+  #after_commit :push_notification!, on: :create
 
   private
   def push_notification!

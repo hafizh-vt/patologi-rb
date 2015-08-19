@@ -2,11 +2,11 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  root 'notifications#index'
+  root 'notifications#all'
   get 'ping' => proc { [200, {"Content-Type" => "text/plain"}, ["Pong!" ]] }
   post 'notifications/create' => 'notifications#create'
-  post 'notifications/create_error' => 'notifications#create_error' 
-  get 'notifications/clear' => 'notifications#clear'
+  post 'notifications/create_error' => 'notifications#create_error'
+  delete 'notifications/clear' => 'notifications#clear'
   get 'notifications/all' => 'notifications#all'
   get 'notifications' => 'notifications#show'
   post 'notifications' => 'notifications#notify'
@@ -15,6 +15,12 @@ Rails.application.routes.draw do
   get 'notifications/status' => 'notifications#show_notification_status_setting'
 
   post 'notifications/panda' => 'notifications#panda'
+
+  delete 'notifications' => 'notifications#destroy_all'
+
+  get 'sms' => 'sms#index'
+  post 'sms' => 'sms#create'#, defaults: {expect_success: 'false'}
+  delete 'sms' => 'sms#destroy_all'
 
 
   # Example of regular route:

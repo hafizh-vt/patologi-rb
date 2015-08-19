@@ -1,0 +1,37 @@
+<% if @sms.empty? %>
+  no sms found
+<% else %>
+  <a class="btn btn-danger" style="margin:10px" href="/sms" data-method="delete">Clear All</a>
+  
+  <table id="sms" class="display">
+    <thead>
+      <tr>
+        <th>Delivery Time</th>
+        <th>Delivery Status</th>
+        <th>Phone Number</th>
+        <th>Message</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @sms.each do |sms| %>
+        <tr>
+          <td><%= sms.created_at %></td>
+          <td><%= sms.status ? 'Success' : 'Failed' %></td>
+          <td><%= sms.phone_number %></td>
+          <td><%= sms.message %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+        $('#sms').DataTable();
+        $('#nav-notif').attr('class', '');
+        $('#nav-sms').attr('class', 'active');
+    } );
+  </script>
+<% end %>

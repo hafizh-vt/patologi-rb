@@ -1,12 +1,36 @@
-<% unless @notifications.count == 0 %>
-
-<h1><%= @notifications.count %> notification.</h1>
-<ol>
-	<% @notifications.each do |notif| %>
-	<li><%= notif.id %> - <%= notif.created_at %> - <%= notif.message %></li>
-	<% end %>
-</ol>
-
+<% if @notifications.empty? %>
+  no notification found
 <% else %>
-<h1>0 notification.</h1>
+  <a class="btn btn-danger" style="margin:10px" href="/notifications" data-method="delete">Clear All</a>
+  <table id="notifications" class="display" style="table-layout:fixed">
+    <thead>
+      <tr>
+				<th>Notification Time</th>
+				<th>Notification Status</th>
+        <th style="width:60%">Message</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @notifications.each do |notif| %>
+				<% content = JSON.parse(notif.message) %>
+        <tr>
+					<td><%= notif.created_at %></td>
+					<td><%= notif.flag ? 'Success' : 'Failed' %></td>
+          <td>
+						<textarea style="width:100%" rows=10><%= JSON.pretty_generate(content) %></textarea>
+					</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+		$(document).ready(function() {
+				$('#notifications').DataTable();
+				$('#nav-notif').attr('class', 'active');
+				$('#nav-sms').attr('class', '');
+		} );
+  </script>
 <% end %>

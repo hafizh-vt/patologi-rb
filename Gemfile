@@ -43,6 +43,9 @@ end
 group :development, :test do
   gem 'pry'
   gem "sqlite3"
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'capybara'
 end
 
 
@@ -52,3 +55,4 @@ gem 'wannabe_bool'
 gem 'pusher'
 gem 'eventmachine'
 gem 'pusher-client'
+gem 'byebug'
